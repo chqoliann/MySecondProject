@@ -13,5 +13,6 @@
         {%csrf_token%}
         {{form.as_p}}
         <button type="submit">Register</button>
-</body>
+        <a href="{%url 'signin'%}">you are registered? go to login !</a>
+    </body>
 </html>

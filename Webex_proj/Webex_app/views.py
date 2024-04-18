@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
-from .forms import UserRegistrationForm
+from .forms import UserRegistrationForm, UserLoginForm
+from django.contrib.auth import authenticate, login
 
 
 def index(request):
@@ -24,3 +25,22 @@ def signup_view(request):
     else:
         form = UserRegistrationForm()
         return render(request, 'signup.html', {'form': form})
+
+
+def signin_view(request):
+    if request.method == 'POST':
+        form = UserLoginForm(request.POST)
+        if form.is_valid():
+            username = form.cleaned_data['username']
+            password = form.cleaned_data['password']
+            user = authenticate(request, username=username, password=password)
+            if user is not None:
+                login(request, user)
+                return redirect('index')
+            else:
+                error_message = "Invalid username or password."
+                return render(request, 'index.html', {'form': form, 'error_message':error_message})
+
+    else:
+        form = UserLoginForm()
+        return render(request, 'signin.html', {"form":form})

@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        /* Общие стили */
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            color: #333;
+            background: linear-gradient(to right, #ffecd2, #fcb69f); /* Изменен цвет фона на кремовый с плавным переходом */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            width: 1600px;
+            height: 600px;
+            background-color: #fff;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 8px 12px rgba(0, 0, 0, 0.1);
+            animation: fadeIn 1s ease-out;
+
+
+        }
+
+        .profile-section {
+            margin-top: 0px;
+            animation: slideInLeft 1s ease-out;
+        }
+
+        .user-info h1 {
+            font-size: 28px;
+            margin-bottom: 10px;
+            text-align: center;
+            color: #ff6f61;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: bold;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .user-info p {
+            font-size: 18px;
+            margin-bottom: 10px;
+            color: #333;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .user-info strong {
+            font-weight: bold;
+            color: #ff6f61;
+        }
+
+        .icon {
+            color: #ff6f61;
+            margin-right: 10px;
+        }
+
+        .profile-section ul {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: flex-start;
+        }
+
+        .btn-perfume {
+            padding: 10px 20px;
+            background-color: #ff6f61;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            text-transform: uppercase;
+            font-weight: bold;
+            transition: background-color 0.3s, transform 0.3s;
+            margin-top: 10px;
+            margin-right: 10px;
+            margin-bottom: 10px;
+            display: inline-block;
+        }
+
+        .btn-perfume:hover {
+            background-color: #ff514d;
+            transform: translateY(-3px);
+        }
+
+        /* Анимации */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideInLeft {
+            from {
+                transform: translateX(-100%);
+            }
+            to {
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .header {
+            background-color: #fff;
+            padding: 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            font-size: 32px;
+            color: #ff6f61;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: bold;
+            animation: fadeInDown 1s ease-out;
+        }
+
+        .nav {
+            display: flex;
+            animation: fadeInDown 1s ease-out;
+        }
+
+        .nav a {
+            text-decoration: none;
+            color: #333;
+            margin-left: 20px;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .nav a:hover {
+            color: #ff6f61;
+        }
+
+        .btn {
+            padding: 20px 40px;
+            background-color: #ff6f61;
+            color: #fff;
+            border: none;
+            border-radius: 50px;
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: bold;
+            font-size: 18px;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s, transform 0.3s;
+            animation: fadeInUp 1s ease-out;
+            margin-left: 20px;
+        }
+
+        .btn:hover {
+            background-color: #ff514d;
+            transform: translateY(-5px);
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Стили для формы поиска */
+        .form-group {
+            display: inline-block;
+            position: relative;
+            margin-right: 20px;
+        }
+
+        .form-control {
+            width: 300px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+
+        .form-control:focus {
+            border-color: #ff6f61;
+        }
+
+        .btn-primary {
+            padding: 10px 20px;
+            background-color: #ff6f61;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .btn-primary:hover {
+            background-color: #ff514d;
+        }
+    </style>
+</head>
+<body>
+<header class="header">
+    <a href="/"><h1 class="logo">Lumiluxe</h1></a>
+    <form method="GET" action="/" class="form-group">
+        <input type="text" class="form-control" name="q" placeholder="Search for courses">
+        <button type="submit" class="btn btn-primary">Search</button>
+    </form>
+    {% if user.is_authenticated %}
+    <nav class="nav">
+        <a href="{% url 'logout'%}" class="btn btn-dark-mode">Logout</a>
+        <a href="{%url 'user_profile'%}" class="btn btn-dark-mode">Profile</a>
+        {%else%}
+        <a href="{%url 'signin'%}" class="btn btn-dark-mode">Login</a>
+        <a href="{%url 'signup'%}" class="btn btn-dark-mode">Register</a>
+        {%endif%}
+        <a href="{%url 'feedback'%}" class="btn btn-dark-mode">Feedback</a>
+        <a href="/" class="btn btn-dark-mode">Home</a>
+    </nav>
+</header>
+<div class="container">
+    <div class="profile-section">
+        <div class="user-info">
+            <h1><i class="fas fa-user icon"></i>User Profile</h1>
+        </div>
+    </div>
+    <div class="profile-section">
+        <p><strong><i class="fas fa-user-circle icon"></i>Username:</strong> {{ user_profile.user.username }}</p>
+        <p><strong><i class="fas fa-calendar-alt icon"></i>Registration Date:</strong> {{ user_profile.registration_date }}</p>
+    </div>
+    <div class="profile-section" id="perfume-section">
+        <h2>Liked Perfumes:</h2>
+        <ul>
+            {% for perfume in liked_perfumes %}
+            <li><a href="{% url 'perfume_details' perfume.pk %}" class="btn-perfume">{{ perfume.perfume_name }}</a></li>
+            {% if forloop.counter|divisibleby:11 and not forloop.last %}
+        </ul>
+        <ul>
+            {% endif %}
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+
+<script>
+    const perfumeSection = document.getElementById('perfume-section');
+    const perfumeButtons = perfumeSection.querySelectorAll('.btn-perfume');
+
+    let delay = 0;
+    perfumeButtons.forEach(button => {
+        setTimeout(() => {
+            button.style.display = 'inline-block';
+        }, delay);
+        delay += 100;
+    });
+</script>
+</body>
+</html>

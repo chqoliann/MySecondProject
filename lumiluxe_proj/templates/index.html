@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lumiluxe</title>
+    <style>
+        /* Общие стили */
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            color: #333;
+            background: linear-gradient(to right, #ffecd2, #fcb69f); /* Изменен цвет фона на кремовый с плавным переходом */
+        }
+
+        /* Стили для header */
+        .header {
+            background-color: #fff;
+            padding: 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            font-size: 32px;
+            color: #ff6f61;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: bold;
+            animation: fadeInDown 1s ease-out;
+        }
+
+        .nav {
+            display: flex;
+            animation: fadeInDown 1s ease-out;
+        }
+
+        .nav a {
+            text-decoration: none;
+            color: #333;
+            margin-left: 20px;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .nav a:hover {
+            color: #ff6f61;
+        }
+
+        .btn {
+            padding: 20px 40px;
+            background-color: #ff6f61;
+            color: #fff;
+            border: none;
+            border-radius: 50px;
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: bold;
+            font-size: 18px;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s, transform 0.3s;
+            animation: fadeInUp 1s ease-out;
+            margin-left: 20px; /* Добавлен отступ между кнопками */
+        }
+
+        .btn:hover {
+            background-color: #ff514d;
+            transform: translateY(-5px);
+        }
+
+        /* Стили для hero */
+        .hero {
+            background-image: url('hero-bg.jpg');
+            background-size: cover;
+            background-position: center;
+            color: #fff;
+            text-align: center;
+            padding: 200px 0;
+            margin-top: 100px;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .hero-title {
+            font-size: 64px;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: bold;
+            color: #ff6f61;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .hero-text {
+            font-size: 24px;
+            margin-bottom: 30px;
+            opacity: 0.8;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Стили для раздела с продуктами */
+        .product-section {
+            padding: 100px 0;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .product-title {
+            font-size: 48px;
+            margin-bottom: 50px;
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .product-brand {
+            font-size: 24px;
+            text-align: center;
+            margin-bottom: 20px;
+            color: #ff6f61;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: bold;
+        }
+
+        .product-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .product-card {
+            width: 400px;
+            height: 600px;
+            background-color: #fff;
+            border-radius: 30px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            margin: 20px;
+            overflow: hidden;
+            transition: transform 0.3s;
+            position: relative;
+            cursor: pointer;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .product-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.2);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .product-card:hover::before {
+            opacity: 1;
+        }
+
+        .product-img {
+            width: 90%;
+            height: auto;
+            object-fit: cover;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: transform 0.3s;
+            left: 70px;
+        }
+
+        .product-card:hover .product-img {
+            transform: scale(1.1);
+        }
+
+        .product-details {
+            padding: 20px;
+            opacity: 0;
+            transition: opacity 0.3s;
+            background-color: rgba(0, 0, 0, 0.8);
+            color: #fff;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .product-card:hover .product-details {
+            opacity: 1;
+        }
+
+        .product-name,
+        .product-description {
+            margin-bottom: 10px;
+        }
+
+        .product-name {
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .product-description {
+            font-size: 14px;
+        }
+
+        /* Анимации */
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Добавлены анимации для появления элементов при прокрутке страницы */
+        @keyframes fadeInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes fadeInRight {
+            from {
+                opacity: 0;
+                transform: translateX(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        /* Стили для формы поиска */
+        .form-group {
+            display: inline-block;
+            position: relative;
+            margin-right: 20px;
+        }
+
+        .form-control {
+            width: 300px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+
+        .form-control:focus {
+            border-color: #ff6f61;
+        }
+
+        .btn-primary {
+            padding: 10px 20px;
+            background-color: #ff6f61;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .btn-primary:hover {
+            background-color: #ff514d;
+        }
+
+        /* Стили для сердечка */
+        .heart {
+            font-size: 16px;
+            vertical-align: middle;
+            transition: color 0.3s;
+        }
+
+        .heart:hover {
+            color: red;
+        }
+
+        .heart.active {
+            color: red;
+        }
+        .product-img img {
+    width: 100%;
+    height: 300px; /* Измените значение на желаемую высоту */
+    object-fit: cover;
+}
+    </style>
+</head>
+<body>
+    <header class="header">
+        <a href="/"><h1 class="logo">Lumiluxe</h1></a>
+        <form method="GET" action="/" class="form-group">
+            <input type="text" class="form-control" name="q" placeholder="Search for courses">
+            <button type="submit" class="btn btn-primary">Search</button>
+        </form>
+        {% if user.is_authenticated %}
+        <nav class="nav">
+            <a href="{% url 'logout'%}" class="btn btn-dark-mode">Logout</a>
+            <a href="{%url 'user_profile'%}" class="btn btn-dark-mode">Profile</a>
+
+        {%else%}
+            <a href="{%url 'signin'%}" class="btn btn-dark-mode">Login</a>
+            <a href="{%url 'signup'%}" class="btn btn-dark-mode">Register</a>
+        {%endif%}
+            <a href="{%url 'feedback'%}" class="btn btn-dark-mode">Feedback</a>
+            <a href="/" class="btn btn-dark-mode">Home</a>
+
+        </nav>
+    </header>
+
+    <section class="hero">
+        <h2 class="hero-title">Discover Your Signature Scent</h2>
+        <p class="hero-text">Explore our exquisite collection of fragrances.</p>
+        <a href="#products" class="btn btn-dark-mode">Shop Now</a>
+    </section>
+
+    <section id="products" class="product-section">
+        <h2 class="product-title">Featured Products</h2>
+        {% for brand in brandes %}
+            <h3 class="product-brand">{{ brand }}</h3>
+            <div class="product-container">
+                {% for perfume in all_perfumes %}
+                    {% if perfume.brand == brand %}
+                        <div class="product-card">
+                            <a href="{% url 'perfume_details' perfume.pk %}"><img src="{{ perfume.image.url }}" alt="{{ perfume.perfume_name }}" class="product-img"></a>
+                            <div class="product-details">
+                                <h4 class="product-name">{{ perfume.perfume_name }}</h4>
+                                <p class="product-description">{{ perfume.recipe }}</p>
+                                {% if user.is_authenticated %}
+                                    {% if perfume in user.userprofile.liked_perfumes.all %}
+                                        <button class="btn btn-secondary disabled">
+                                            <span class="heart active">❤️</span> Liked
+                                        </button>
+                                    {% else %}
+                                        <form action="{% url 'like_perfume' perfume.pk %}" method="POST">
+                                                    {% csrf_token %}
+                                                    <button type="submit" class="btn btn-primary">
+                                                        <span class="heart">🤍</span> Like
+                                                    </button>
+                                            </form>
+                                    {% endif %}
+                                {% else %}
+                                    <a href="{% url 'signin' %}" class="btn btn-secondary disabled">Login</a><h5>for more</h5>
+
+                                {% endif %}
+                            </div>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        {% endfor %}
+    </section>
+
+    <script>
+        // Обработчик события клика для изменения цвета сердечка
+        document.querySelectorAll('.btn-primary').forEach(btn => {
+            btn.addEventListener('click', () => {
+                btn.querySelector('.heart').classList.toggle('active');
+            });
+        });
+    </script>
+</body>
+</html>
